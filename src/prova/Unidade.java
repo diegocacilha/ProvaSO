@@ -10,7 +10,5 @@ public class Unidade {
         this.tamanho = tamanho;
     }
     
-    public void subtrairTamanho(int tamanho){
-        this.tamanho = this.tamanho - tamanho;
-    }
+    
 }
