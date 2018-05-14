@@ -1,14 +1,14 @@
 package prova;
 
 public class Memoria {
-    private Unidade unidadeAlocacao;
+    private Unidade livre;
     
     public Memoria(int tamanho){
-        this.unidadeAlocacao = new Unidade(tamanho);
+        this.livre = new Unidade(tamanho);
     }
     
     public void alocar(int tamanho){
-        
+        this.livre = this.livre - tamanho; 
     }
     
 }
