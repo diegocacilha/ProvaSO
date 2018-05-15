@@ -10,7 +10,26 @@ public class Unidade {
         this.tamanho = tamanho;
     }
     
-    public void subtrairTamanho(int tamanho){
-        this.tamanho = this.tamanho - tamanho;
+    public boolean getLivre(){
+        return this.livre;
+    }
+    
+    public boolean temAnterior(){
+        return !this.anterior.equals(null);
+    }
+    public Unidade getProximo(){
+        return this.proximo;
+    }
+    public Unidade getAnterior(){
+        return this.anterior;
+    }
+    public void setLivre(boolean b){
+        this.livre = b;
+    }
+    public void setProximo(Unidade uni){
+        this.proximo = uni;
+    }
+    public void setAnterior(Unidade uni){
+        this.anterior = uni;
     }
 }
