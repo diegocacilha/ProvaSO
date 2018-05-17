@@ -8,7 +8,7 @@ public class Memoria {
     }
     
     public void alocar(int tamanho){
-        this.livre = this.livre - tamanho; 
+        //this.livre = this.livre - tamanho; 
     }
     
 }
