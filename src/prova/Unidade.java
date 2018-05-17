@@ -1,21 +1,24 @@
 package prova;
 
-public class Unidade {
+public class Unidade extends MemoriaFisica{
     private boolean livre = true;
-    private int tamanho;
     private Unidade anterior = null;
     private Unidade proximo = null;
     
     public Unidade(int tamanho){
-        this.tamanho = tamanho;
+        super(tamanho);
     }
 
-    public boolean getLivre(){
+    public boolean inUse(){
         return this.livre;
     }
     
-    public boolean temAnterior(){
-        return this.anterior.equals(null);
+    
+    public boolean antIsNull(){
+        return this.anterior == null;
+    }
+    public boolean proxIsNull(){
+        return this.proximo == null;
     }
     public Unidade getProximo(){
         return this.proximo;
