@@ -12,19 +12,32 @@ public class Gerenciador {
      * @param tamanho Tamanho da memória
      */
     public Gerenciador(int tamanho) {
-        this.unidadeAlocacao = new Unidade(tamanho);
+        this.unidadeAlocacao = new Unidade(tamanho, 0);
     }
 
-    public void alocarProximoLivre(int tamanho) throws Exception{
-        this.unidadeAlocacao.setProximo(tamanho);
+    private void impossivelAlocarProximo() throws Exception{
+        throw new Exception("Impossível alocar próximo");
     }
-    
-    
-    public void showNoh(){
-        while(this.unidadeAlocacao.getProximo() != null){
-            this.unidadeAlocacao.get
+    public void alocarProximoLivre(int tamanho) throws Exception {
+        if (this.unidadeAlocacao.getProximo() == null) {
+            if (this.unidadeAlocacao.getLivre() && tamanho <= this.unidadeAlocacao.getTamanho()) {
+                this.unidadeAlocacao.setTamanho(this.unidadeAlocacao.getTamanho() - tamanho);
+                Unidade temp = new Unidade(tamanho, this.unidadeAlocacao.getTamanho());
+                this.unidadeAlocacao.setProximo(temp);
+            }else{
+                this.impossivelAlocarProximo();
+            }
+        } else {
+            if (this.unidadeAlocacao.getLivre() && tamanho <= this.unidadeAlocacao.getTamanho()) {
+                this.unidadeAlocacao.setTamanho(this.unidadeAlocacao.getTamanho() - tamanho);
+                Unidade temp = new Unidade(tamanho, this.unidadeAlocacao.getTamanho());
+                temp.setProximo(this.unidadeAlocacao.getProximo());
+                this.unidadeAlocacao.setProximo(temp);
+            }else{
+                this.impossivelAlocarProximo();
+            }
+
         }
-        
+//        Unidade temp = new Unidade(tamanho, tamanho)
     }
-
 }

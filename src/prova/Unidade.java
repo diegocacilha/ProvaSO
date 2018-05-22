@@ -3,25 +3,23 @@ package prova;
 public class Unidade {
     private boolean livre = true;
     private int tamanho;
-//    private int fim;
+    private int inicio;
     private Unidade proximo = null;
 
-    public Unidade(int tamanho){
+    public Unidade(int tamanho, int inicio){
         this.tamanho = tamanho;
+        this.inicio = inicio;
     }
     
-    public void setProximo(int tamanho) throws Exception{
-        if(this.getLivre() && tamanho <= this.tamanho) {
-            this.proximo = new Unidade(tamanho);
-            this.proximo.setLivre(false);
-            this.tamanho = this.tamanho - tamanho;
-        }else{
-            throw new Exception("Tamanho disponível: "+ this.tamanho + " Tamanho pretendido: "+ tamanho);
-        }
+    public void setProximo(Unidade proximo) throws Exception{
+        if(this.proximo == null || this.proximo.getLivre())
+            this.proximo = proximo;
+        else
+            throw new Exception("Não foi possível adicionar um próximo");
     }
     
     public int getInicio(){
-        return this.tamanho - this.tamanho -1;
+        return this.inicio;
     }
     
     public int getTamanho() {
@@ -45,13 +43,4 @@ public class Unidade {
     public void setLivre(boolean b){
         this.livre = b;
     }
-//    public Unidade proximoLivre() throws Exception{
-//        if(this.proximo.getLivre()){
-//            return this;
-//        }else if(this.proximo != null){
-//            return this.proximo.proximoLivre();
-//        }else{
-//            throw new Exception("Impossível adicionar próximo");
-//        }
-//    }
 }

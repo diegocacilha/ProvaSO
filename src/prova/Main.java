@@ -6,7 +6,7 @@ public class Main {
         Gerenciador mem = new Gerenciador(1024);
 
         try {
-            mem.alocarProximoLivre(500);
+            mem.alocarProximoLivre(400);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -20,8 +20,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        mem
+        System.out.println("");
     }
 
 }
