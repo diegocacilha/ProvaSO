@@ -1,31 +1,35 @@
-
 package prova;
 
-public class Memoria {
-    private Unidade unidadeAlocacao;
+public class Unidade {
+    private boolean livre = true;
+    private int tamanho;
+    private Unidade anterior = null;
+    private Unidade proximo = null;
     
-//    public Memoria(int tamanho){
-//        this.unidadeAlocacao = new Unidade(tamanho);
-//    }
-    
-    
-    public Memoria(int tamanho){
-	this.unidadeAlocacao = new Unidade(tamanho);
-        this.unidadeAlocacao.setProximo(unidadeAlocacao);//inicialmente a lista será vazia, então o próximo e anterior apontam pra ela mesma
-        this.unidadeAlocacao.setAnterior(unidadeAlocacao);
+    public Unidade(int tamanho){
+        this.tamanho = tamanho;
     }
-    /**
-     * A lógica básica para fazer a lista encadeada é mais ou menos essa. 
-     * Só temos que subtrair o tamanho da nova unidade da unidadeAlocacao
-     * @param tamanho Tamanho da unidade que será alocada
-     */
-    public void alocar(int tamanho){
-        Unidade temp = new Unidade(tamanho);
-        temp.setLivre(false);
-        if(!this.unidadeAlocacao.temAnterior()) this.unidadeAlocacao.setAnterior(temp);
-        temp.setProximo(this.unidadeAlocacao.getProximo());
-        temp.setAnterior(this.unidadeAlocacao);
-        this.unidadeAlocacao.setProximo(temp);
+
+    public boolean getLivre(){
+        return this.livre;
     }
     
+    public boolean temAnterior(){
+        return this.anterior.equals(null);
+    }
+    public Unidade getProximo(){
+        return this.proximo;
+    }
+    public Unidade getAnterior(){
+        return this.anterior;
+    }
+    public void setLivre(boolean b){
+        this.livre = b;
+    }
+    public void setProximo(Unidade uni){
+        this.proximo = uni;
+    }
+    public void setAnterior(Unidade uni){
+        this.anterior = uni;
+    }
 }
