@@ -4,25 +4,38 @@ public class Gerenciador {
 
     private Unidade unidadeAlocacao;
 
-//    public Memoria(int tamanho){
-//        this.unidadeAlocacao = new Unidade(tamanho);
-//    }
-    /**
-     *
-     * @param tamanho Tamanho da memória
-     */
     public Gerenciador(int tamanho) {
-        this.unidadeAlocacao = new Unidade(tamanho, 0);
+        this.unidadeAlocacao = new Unidade(tamanho);
+        this.unidadeAlocacao.setInicio(0);
     }
 
     private void impossivelAlocarProximo() throws Exception{
         throw new Exception("Impossível alocar próximo");
     }
-    public void alocarProximoLivre(int tamanho) throws Exception {
+    private void setVerificado(){
+        while(this.unidadeAlocacao.verificado){
+            this.unidadeAlocacao.verificado = false;
+            this.unidadeAlocacao = this.unidadeAlocacao.getProximo();
+        }
+    }
+    public void alocarProximoLivre(int tamanho) {
+        Unidade temp;
+        do{
+            if(this.unidadeAlocacao.estaLivre())
+                temp = this.unidadeAlocacao;
+            else
+                this.unidadeAlocacao.verificado = true;
+                this.unidadeAlocacao = this.unidadeAlocacao.getProximo();
+        }while(!this.unidadeAlocacao.estaLivre() && !this.unidadeAlocacao.verificado);
+        
+        this.setVerificado();
+        
+        //Unidade temp = new Unidade(tamanho);
+        /*
+        temp.setInicio(this.unidadeAlocacao.getTamanho());
         if (this.unidadeAlocacao.getProximo() == null) {
             if (this.unidadeAlocacao.getLivre() && tamanho <= this.unidadeAlocacao.getTamanho()) {
                 this.unidadeAlocacao.setTamanho(this.unidadeAlocacao.getTamanho() - tamanho);
-                Unidade temp = new Unidade(tamanho, this.unidadeAlocacao.getTamanho());
                 this.unidadeAlocacao.setProximo(temp);
             }else{
                 this.impossivelAlocarProximo();
@@ -30,7 +43,8 @@ public class Gerenciador {
         } else {
             if (this.unidadeAlocacao.getLivre() && tamanho <= this.unidadeAlocacao.getTamanho()) {
                 this.unidadeAlocacao.setTamanho(this.unidadeAlocacao.getTamanho() - tamanho);
-                Unidade temp = new Unidade(tamanho, this.unidadeAlocacao.getTamanho());
+                temp = new Unidade(tamanho);
+                temp.setInicio(this.unidadeAlocacao.getTamanho());
                 temp.setProximo(this.unidadeAlocacao.getProximo());
                 this.unidadeAlocacao.setProximo(temp);
             }else{
@@ -38,6 +52,6 @@ public class Gerenciador {
             }
 
         }
-//        Unidade temp = new Unidade(tamanho, tamanho)
+        */
     }
 }
