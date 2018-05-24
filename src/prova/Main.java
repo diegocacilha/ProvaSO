@@ -3,26 +3,14 @@ package prova;
 public class Main {
 
     public static void main(String[] args) throws Exception{
-        Gerenciador mem = new Gerenciador(200);
+        Gerenciador gerencia = new Gerenciador(400);
         
-        mem.alocarProximoLivre(100);
-
-//        try {
-//            mem.alocarProximoLivre(400);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        try {
-//            mem.alocarProximoLivre(524);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        try {
-//            mem.alocarProximoLivre(100);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        System.out.println("");
+        gerencia.firtFit(200);
+        gerencia.firtFit(100);
+        gerencia.firtFit(55);
+        gerencia.firtFit(35);
+        gerencia.firtFit(11);
+        System.out.println("Aqui");
     }
 
 }

@@ -1,57 +1,35 @@
 package prova;
 
 public class Gerenciador {
-
-    private Unidade unidadeAlocacao;
-
-    public Gerenciador(int tamanho) {
-        this.unidadeAlocacao = new Unidade(tamanho);
-        this.unidadeAlocacao.setInicio(0);
+    Unidade uniCorrente;
+    
+    public Gerenciador(int tamanho){
+        this.uniCorrente = new Unidade(tamanho);
+        this.uniCorrente.inicio = 0;
     }
-
-    private void impossivelAlocarProximo() throws Exception{
-        throw new Exception("Impossível alocar próximo");
-    }
-    private void setVerificado(){
-        while(this.unidadeAlocacao.verificado){
-            this.unidadeAlocacao.verificado = false;
-            this.unidadeAlocacao = this.unidadeAlocacao.getProximo();
-        }
-    }
-    public void alocarProximoLivre(int tamanho) {
-        Unidade temp;
+    private Unidade retornaProximoLivre(int tamanho){
+        Unidade temp = null;
         do{
-            if(this.unidadeAlocacao.estaLivre())
-                temp = this.unidadeAlocacao;
+            if(uniCorrente.estaLivre && uniCorrente.tamanho >= tamanho)
+                temp = uniCorrente;
             else
-                this.unidadeAlocacao.verificado = true;
-                this.unidadeAlocacao = this.unidadeAlocacao.getProximo();
-        }while(!this.unidadeAlocacao.estaLivre() && !this.unidadeAlocacao.verificado);
+                uniCorrente = uniCorrente.proximo;
+        }while(!temp.estaLivre);
         
-        this.setVerificado();
-        
-        //Unidade temp = new Unidade(tamanho);
-        /*
-        temp.setInicio(this.unidadeAlocacao.getTamanho());
-        if (this.unidadeAlocacao.getProximo() == null) {
-            if (this.unidadeAlocacao.getLivre() && tamanho <= this.unidadeAlocacao.getTamanho()) {
-                this.unidadeAlocacao.setTamanho(this.unidadeAlocacao.getTamanho() - tamanho);
-                this.unidadeAlocacao.setProximo(temp);
-            }else{
-                this.impossivelAlocarProximo();
-            }
-        } else {
-            if (this.unidadeAlocacao.getLivre() && tamanho <= this.unidadeAlocacao.getTamanho()) {
-                this.unidadeAlocacao.setTamanho(this.unidadeAlocacao.getTamanho() - tamanho);
-                temp = new Unidade(tamanho);
-                temp.setInicio(this.unidadeAlocacao.getTamanho());
-                temp.setProximo(this.unidadeAlocacao.getProximo());
-                this.unidadeAlocacao.setProximo(temp);
-            }else{
-                this.impossivelAlocarProximo();
-            }
-
-        }
-        */
+        return temp;
     }
+    public void firtFit(int tamanho){
+        Unidade objCorrente = this.retornaProximoLivre(tamanho);
+        
+        Unidade novaUnidade = new Unidade(tamanho);
+        novaUnidade.estaLivre = false;
+        if(objCorrente.proximo != null) 
+            novaUnidade.proximo = objCorrente.proximo;
+        objCorrente.proximo = novaUnidade;
+        objCorrente.tamanho = objCorrente.tamanho - tamanho;
+        novaUnidade.inicio = objCorrente.tamanho;
+        
+    }
+    
 }
+
