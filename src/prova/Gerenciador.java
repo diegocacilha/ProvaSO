@@ -8,19 +8,14 @@ public class Gerenciador {
         this.uniCorrente.inicio = 0;
         this.uniCorrente.fim = tamanho -1;
     }
-    private Unidade retornaProximoLivre(int tamanho){
-        Unidade temp = this.uniCorrente;
-        do{
-            if(!(temp.estaLivre && temp.tamanho >= tamanho))
-                temp = temp.proximo;
-        }while(!temp.estaLivre);
-        
-        return temp;
-    }
-    public void firstFit(int tamanho){
-        Unidade objCorrente = this.retornaProximoLivre(tamanho);
-        
-        Unidade novaUnidade = new Unidade(tamanho);
+    public void alocar(int tamanho) throws Exception{
+        Unidade objCorrente = this.uniCorrente.proximaLivre(tamanho);
+        Unidade novaUnidade;
+        if(tamanho <= objCorrente.tamanho){
+            novaUnidade = new Unidade(tamanho);
+        }else{
+            throw new Exception("Tamanho maior do que o possível");
+        }
         novaUnidade.estaLivre = false;
         
         if(objCorrente.proximo != null){
@@ -30,11 +25,12 @@ public class Gerenciador {
         objCorrente.proximo = novaUnidade;
         novaUnidade.anterior = objCorrente;
         
-        objCorrente.tamanho = objCorrente.tamanho - tamanho;
-        objCorrente.fim = objCorrente.tamanho -1;
+        objCorrente.subtair(tamanho);
         novaUnidade.inicio = objCorrente.fim+1;
         novaUnidade.fim = novaUnidade.inicio + novaUnidade.tamanho -1;
         
+        if(this.uniCorrente.tamanho == 0)
+            this.uniCorrente = this.uniCorrente.proximo;
         
     }
     
@@ -44,7 +40,6 @@ public class Gerenciador {
             if(temp.tamanho != tamanho)
                 temp = temp.proximo;
             
-            System.out.println("ll");
         }while(temp.tamanho != tamanho);
         
         temp.estaLivre = true;
