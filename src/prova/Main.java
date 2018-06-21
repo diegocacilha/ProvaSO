@@ -3,13 +3,15 @@ package prova;
 public class Main {
 
     public static void main(String[] args) throws Exception{
-        Gerenciador gerencia = new Gerenciador(400);
+        Gerenciador gerencia = new Gerenciador(20);
         
-        gerencia.alocar(100);
-        gerencia.alocar(150);
-        gerencia.alocar(70);
+        gerencia.alocar(1);
         gerencia.alocar(10);
-        gerencia.desalocar(70);
+        gerencia.alocar(5);
+        gerencia.alocar(2);
+        gerencia.alocar(2);
+        gerencia.desalocar(19);
+        gerencia.alocar(1);
         
         
         
