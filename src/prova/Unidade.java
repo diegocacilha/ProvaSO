@@ -67,22 +67,31 @@ public class Unidade {
     /**
      * Pesquisa e retorna o próximo livre com tamanho menor ou igual ao espaço
      * desejado
-     * teste 
+     * 
      * @param tamanho Tamanho a ser alocado
      * @throws Exception Tamanho livre não 
      */
     public void addUnidade(int tamanho) throws Exception {
         if (this.estaLivre && this.tamanho >= tamanho) {
             this.addUnidade(new Unidade(tamanho));
-        } else if (anterior != null && !anterior.visitado) {
-            anterior.visitado = true;
-            anterior.addUnidade(tamanho);
-        } else if (proximo != null && !proximo.visitado) {
-            proximo.visitado = true;
-            proximo.addUnidade(tamanho);
-        } else {
-            throw new Exception("Impossível encontrar um espaço livre com o tamanho de " + tamanho);
+        } else if(this.proximo != null){
+            this.proximo.addUnidade(tamanho);
+        } else if(this.anterior != null){
+            this.anterior.addUnidade(tamanho);
+        }else{
+            System.out.println("prova.Unidade.addUnidade()");
         }
+       
+        
+//        else if (anterior != null && !anterior.visitado) {
+//            anterior.visitado = true;
+//            anterior.addUnidade(tamanho);
+//        } else if (proximo != null && !proximo.visitado) {
+//            proximo.visitado = true;
+//            proximo.addUnidade(tamanho);
+//        } else {
+//            throw new Exception("Impossível encontrar um espaço livre com o tamanho de " + tamanho);
+//        }
     }
 
     //seta todos os itens da lista como não visitado
